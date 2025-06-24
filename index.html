@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Personal Page</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* A very light gray background */
+        }
+        /* Style for publication list items */
+        .publication-item {
+            border-left: 3px solid #e5e7eb; /* A light gray border */
+            padding-left: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .publication-item p {
+            margin-bottom: 0.25rem;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Container for the entire page -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+        <!-- Header Section with Name and Navigation -->
+        <header class="mb-12">
+            <div class="flex flex-col sm:flex-row justify-between items-center">
+                <!-- EDIT THIS: Your Name -->
+                <h1 class="text-4xl font-bold text-gray-900 mb-4 sm:mb-0">Your Name</h1>
+                
+                <!-- Navigation Links -->
+                <nav class="flex flex-wrap justify-center space-x-4 sm:space-x-6 text-lg">
+                    <a href="#about" class="text-gray-600 hover:text-blue-600 transition duration-300">About</a>
+                    <a href="#news" class="text-gray-600 hover:text-blue-600 transition duration-300">News</a>
+                    <a href="#publications" class="text-gray-600 hover:text-blue-600 transition duration-300">Publications</a>
+                    <a href="#contact" class="text-gray-600 hover:text-blue-600 transition duration-300">Contact</a>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+
+            <!-- About Me Section -->
+            <section id="about" class="mb-16">
+                <div class="flex flex-col md:flex-row items-start gap-8">
+                    <!-- Profile Image -->
+                    <div class="w-full md:w-1/3 flex-shrink-0">
+                        <!-- EDIT THIS: Change the src to the URL of your profile picture -->
+                        <img 
+                            src="https://placehold.co/400x400/e2e8f0/334155?text=Your+Photo" 
+                            alt="Your Name" 
+                            class="rounded-lg shadow-md w-full"
+                            onerror="this.onerror=null;this.src='https://placehold.co/400x400/e2e8f0/334155?text=Image+Not+Found';"
+                        >
+                    </div>
+                    <!-- Bio Text -->
+                    <div class="w-full md:w-2/3">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-4 border-b pb-2">About Me</h2>
+                        <!-- EDIT THIS: Write your bio here -->
+                        <div class="space-y-4 text-lg text-gray-700">
+                            <p>
+                                I am a [Your Role, e.g., PhD Student, Postdoctoral Researcher] at the [Your Department] at [Your University]. My research focuses on [Your Research Area 1], [Your Research Area 2], and [Your Research Area 3].
+                            </p>
+                            <p>
+                                Previously, I completed my [Your Degree, e.g., Master's degree] at [Previous University]. I am broadly interested in developing robust and efficient systems for a better future.
+                            </p>
+                            <p>
+                                You can contact me via email at: <a href="mailto:your.email@example.com" class="text-blue-600 hover:underline">your.email@example.com</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- News Section -->
+            <section id="news" class="mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6 border-b pb-2">News</h2>
+                <!-- EDIT THIS: Add your news items here -->
+                <ul class="list-disc list-inside space-y-3 text-lg text-gray-700">
+                    <li><span class="font-semibold">[Jun. 2024]</span> Our paper on [Topic] was accepted to [Conference/Journal Name]!</li>
+                    <li><span class="font-semibold">[Jan. 2024]</span> I started my internship at [Company Name].</li>
+                    <li><span class="font-semibold">[Aug. 2023]</span> I will be serving as a reviewer for [Conference/Journal Name].</li>
+                </ul>
+            </section>
+
+            <!-- Publications Section -->
+            <section id="publications" class="mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6 border-b pb-2">Publications</h2>
+                <!-- EDIT THIS: Add your publications here. You can copy and paste the 'publication-item' div for each new paper. -->
+                <div class="space-y-8">
+
+                    <!-- Publication Item 1 -->
+                    <div class="publication-item">
+                        <p class="text-xl font-semibold text-gray-900">A Great Paper on an Interesting Topic</p>
+                        <p class="text-gray-700">
+                            <span class="font-medium">Your Name</span>, Co-author One, Co-author Two
+                        </p>
+                        <p class="text-gray-600 italic">Conference on Important Research (CIR), 2024</p>
+                        <div class="mt-2 space-x-4">
+                            <a href="#" class="text-blue-600 hover:underline">[PDF]</a>
+                            <a href="#" class="text-blue-600 hover:underline">[Code]</a>
+                            <a href="#" class="text-blue-600 hover:underline">[Talk]</a>
+                        </div>
+                    </div>
+
+                    <!-- Publication Item 2 -->
+                    <div class="publication-item">
+                        <p class="text-xl font-semibold text-gray-900">Another Foundational Study</p>
+                        <p class="text-gray-700">
+                            Co-author One, <span class="font-medium">Your Name</span>, Co-author Three
+                        </p>
+                        <p class="text-gray-600 italic">Journal of Foundational Studies (JFS), 2023</p>
+                         <div class="mt-2 space-x-4">
+                            <a href="#" class="text-blue-600 hover:underline">[PDF]</a>
+                            <a href="#" class="text-blue-600 hover:underline">[Project Page]</a>
+                        </div>
+                    </div>
+                    
+                </div>
+            </section>
+            
+            <!-- Contact / Links Section -->
+            <section id="contact" class="mb-16">
+                 <h2 class="text-3xl font-bold text-gray-900 mb-6 border-b pb-2">Links</h2>
+                 <!-- EDIT THIS: Add your professional links -->
+                 <div class="flex flex-wrap gap-4 text-lg">
+                    <a href="mailto:your.email@example.com" class="bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300 transition-colors">Email</a>
+                    <a href="#" class="bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300 transition-colors">CV</a>
+                    <a href="#" class="bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300 transition-colors">Google Scholar</a>
+                    <a href="#" class="bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300 transition-colors">GitHub</a>
+                    <a href="#" class="bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300 transition-colors">LinkedIn</a>
+                 </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="text-center text-gray-500 pt-8 border-t">
+            <p>&copy; 2024 Your Name. Last updated: June 2024.</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
