@@ -1,4 +1,616 @@
-<p></p>At low doses, ionizing radiation is often considered an acceptible minimal risk, although no universally risk-free 
-              threshold has been established for long-term effects such as cancer. Radiation-protection standards are based largely on population-average risks, whereas certain inherited 
-                            variants—particularly those affecting DNA-damage recognition and repair—can make some individuals unusually sensitive to radiation or more susceptible to radiation-induced cancer. 
-                            DNA damage is also an important contributor to normal ageing and interacts bidirectionally with the epigenetic alterations that accumulate over time.</p>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A physics-led research notebook on environmental ionizing radiation, biological response and human health.">
+  <title>Ionizing Radiation &amp; Human Health | Robert B. Scott</title>
+  <style>
+    :root {
+      --ink: #eef4f1;
+      --muted: #9ba9ab;
+      --paper: #081018;
+      --paper-2: #0d1720;
+      --line: rgba(205, 226, 223, 0.15);
+      --cyan: #73ded7;
+      --amber: #ffc36b;
+      --cream: #e5dfd1;
+      --red: #ff936e;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      background:
+        radial-gradient(circle at 88% 4%, rgba(36, 123, 127, 0.15), transparent 33rem),
+        linear-gradient(180deg, #071018 0%, #09131b 48%, #081018 100%);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible { outline: 2px solid var(--amber); outline-offset: 5px; }
+    .shell { width: min(1280px, calc(100% - 64px)); margin: 0 auto; }
+
+    .site-header {
+      min-height: 92px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+      z-index: 5;
+    }
+    .identity { display: inline-flex; align-items: center; gap: 13px; font-weight: 650; letter-spacing: -0.01em; }
+    .identity-mark {
+      width: 38px;
+      height: 38px;
+      border: 1px solid rgba(115, 222, 215, 0.55);
+      color: var(--cyan);
+      display: grid;
+      place-items: center;
+      font: 600 0.66rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+      letter-spacing: 0.08em;
+    }
+    .identity small { color: var(--muted); font-weight: 450; margin-left: 0.4rem; }
+    nav { display: flex; align-items: center; gap: 30px; }
+    nav a { color: var(--muted); font-size: 0.84rem; transition: color 160ms ease; }
+    nav a:hover { color: var(--ink); }
+    nav a:first-child { color: var(--ink); }
+    nav a:first-child::before {
+      content: "";
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--cyan);
+      margin: 0 8px 2px 0;
+    }
+
+    .hero {
+      min-height: 745px;
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      align-items: center;
+      gap: 32px;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(to bottom, black, transparent 92%);
+    }
+    .hero-copy { position: relative; z-index: 2; padding: 84px 0 64px; }
+    .eyebrow, .section-index, .card-tag {
+      margin: 0;
+      font: 600 0.7rem/1.3 ui-monospace, SFMono-Regular, Menlo, monospace;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--cyan);
+    }
+    .eyebrow { display: flex; align-items: center; gap: 10px; }
+    .eyebrow span { width: 26px; height: 1px; background: var(--cyan); }
+    .hero h1 {
+      margin: 26px 0 25px;
+      font: 400 clamp(3.7rem, 6.3vw, 6.8rem)/0.94 Georgia, "Times New Roman", serif;
+      letter-spacing: -0.055em;
+      max-width: 720px;
+    }
+    .hero h1 em { color: var(--cream); font-weight: 400; }
+    .lede { max-width: 620px; margin: 0; color: #bdc8c8; font-size: 1.12rem; line-height: 1.8; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 34px 0 52px; }
+    .button {
+      min-height: 48px;
+      padding: 0 19px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      border: 1px solid var(--line);
+      font-size: 0.85rem;
+      transition: background 180ms ease, border-color 180ms ease;
+    }
+    .button.primary { background: var(--cyan); color: #071316; border-color: var(--cyan); font-weight: 650; }
+    .button.primary:hover { background: #9be8e3; }
+    .button.secondary:hover { border-color: rgba(115, 222, 215, .58); background: rgba(115, 222, 215, .06); }
+    .coordinate-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      max-width: 610px;
+      margin: 0;
+      border-top: 1px solid var(--line);
+      padding-top: 18px;
+    }
+    .coordinate-strip div + div { border-left: 1px solid var(--line); padding-left: 18px; }
+    .coordinate-strip dt { color: #718184; font: 600 0.61rem/1.2 ui-monospace, monospace; letter-spacing: .14em; }
+    .coordinate-strip dd { margin: 5px 0 0; color: #c6d0d0; font-size: .75rem; }
+
+    .event-figure { position: relative; margin: 0; min-width: 0; }
+    .event-display { display: block; width: 100%; max-height: 640px; overflow: visible; }
+    .detector-grid { fill: none; stroke: rgba(187, 213, 212, 0.11); stroke-width: 1; }
+    .tracks, .secondary-tracks { fill: none; stroke-linecap: round; }
+    .tracks { stroke-width: 2.1; }
+    .track-cyan { stroke: var(--cyan); }
+    .track-amber { stroke: var(--amber); }
+    .tracks path { stroke-dasharray: 1; stroke-dashoffset: 1; animation: trace 2.4s cubic-bezier(.3,.7,.2,1) forwards; }
+    .tracks path:nth-child(2) { animation-delay: .15s; }
+    .tracks path:nth-child(3) { animation-delay: .3s; }
+    .tracks path:nth-child(4) { animation-delay: .45s; }
+    .secondary-tracks { stroke: rgba(208, 236, 232, .62); stroke-width: 1.2; stroke-dasharray: 4 7; }
+    .interaction-core { fill: #eefefe; filter: drop-shadow(0 0 8px #fff); }
+    .interaction-halo { fill: none; stroke: var(--cyan); stroke-width: 1; opacity: .6; }
+    .figure-caption { display: flex; align-items: baseline; gap: 14px; margin: -12px 0 0 40px; max-width: 500px; color: #7f8f91; font-size: .69rem; line-height: 1.55; }
+    .figure-caption span { flex: 0 0 auto; color: var(--amber); font: 600 .62rem/1 ui-monospace, monospace; letter-spacing: .13em; }
+    @keyframes trace { to { stroke-dashoffset: 0; } }
+
+    .statement {
+      padding: 108px 0;
+      display: grid;
+      grid-template-columns: .45fr 1.3fr .85fr;
+      gap: 64px;
+      border-bottom: 1px solid var(--line);
+    }
+    .statement blockquote { margin: 0; color: var(--cream); font: 400 clamp(1.65rem, 2.6vw, 2.65rem)/1.35 Georgia, "Times New Roman", serif; }
+    .statement > p:last-child { margin: 2px 0 0; color: var(--muted); font-size: .9rem; line-height: 1.8; }
+
+    .section-block { padding: 112px 0; border-bottom: 1px solid var(--line); }
+    .section-heading {
+      display: grid;
+      grid-template-columns: .45fr 1.3fr .85fr;
+      gap: 64px;
+      align-items: start;
+      margin-bottom: 52px;
+    }
+    .section-heading.compact { margin-bottom: 40px; }
+    .section-heading h2, .evidence h2, .health-copy h2, .susceptibility h2 {
+      margin: -8px 0 0;
+      font: 400 clamp(2.1rem, 4vw, 4rem)/1.08 Georgia, "Times New Roman", serif;
+      letter-spacing: -.035em;
+    }
+    .section-heading > p:last-child { margin: 0; color: var(--muted); font-size: .9rem; }
+
+    .source-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+    .source-card { min-height: 365px; background: var(--paper-2); padding: 32px; transition: background 180ms ease; }
+    .source-card:hover { background: #101e27; }
+    .source-symbol {
+      width: 70px;
+      height: 70px;
+      border: 1px solid rgba(115, 222, 215, .3);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--cyan);
+      font: 400 1.8rem/1 Georgia, serif;
+      margin-bottom: 62px;
+    }
+    .card-tag { color: #6d7c7e; }
+    .source-card h3 { margin: 13px 0 12px; font: 400 1.55rem/1.2 Georgia, serif; }
+    .source-card > p:last-child { margin: 0; max-width: 31ch; color: var(--muted); font-size: .85rem; line-height: 1.75; }
+
+    .pathway { padding: 100px 0 112px; border-bottom: 1px solid var(--line); }
+    .pathway-list { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); margin: 0; padding: 0; border-top: 1px solid var(--line); }
+    .pathway-list li { padding: 24px 28px 10px 0; position: relative; }
+    .pathway-list li:not(:last-child)::after { content: "→"; position: absolute; right: 22px; top: 22px; color: #536466; }
+    .pathway-list span { display: block; color: var(--amber); font: 600 .64rem/1 ui-monospace, monospace; margin-bottom: 28px; }
+    .pathway-list strong { display: block; font: 400 1.17rem/1.25 Georgia, serif; }
+    .pathway-list small { display: block; margin-top: 6px; color: #748486; font: .68rem/1.4 ui-monospace, monospace; }
+
+    .health-panel {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      align-items: center;
+      gap: 58px;
+      margin-bottom: 74px;
+    }
+    .health-copy h2 { margin: 24px 0; }
+    .health-copy .lede { font-size: 1rem; }
+    .cell-figure { margin: 0; min-width: 0; }
+    .cell-figure svg { width: 100%; display: block; }
+    .cell-membrane { fill: rgba(20,48,58,.55); stroke: rgba(115,222,215,.55); stroke-width: 2; }
+    .cell-inner { fill: none; stroke: rgba(115,222,215,.12); stroke-width: 1; stroke-dasharray: 3 8; }
+    .nucleus { fill: rgba(15,37,47,.88); stroke: rgba(255,195,107,.42); stroke-width: 1.5; }
+    .nucleus-ring { fill: none; stroke: rgba(255,195,107,.12); stroke-width: 8; }
+    .dna-helix { fill: none; stroke: rgba(217,232,228,.62); stroke-width: 2; }
+    .dna-helix path:nth-child(n+3) { stroke: rgba(115,222,215,.36); stroke-width: 1; }
+    .ion-track { fill: none; stroke: var(--cyan); stroke-width: 2; stroke-dasharray: 5 7; }
+    .ionization-points { fill: var(--amber); filter: drop-shadow(0 0 5px rgba(255,195,107,.7)); }
+    .lesion-mark { fill: none; stroke: var(--red); stroke-width: 2; }
+    .lesion-mark circle { stroke-dasharray: 3 5; }
+    .figure-labels { fill: #819294; font: 12px ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .04em; }
+    .figure-labels path { fill: none; stroke: rgba(151,174,175,.38); stroke-width: 1; }
+
+    .outcome-grid { border: 1px solid var(--line); }
+    .outcome-grid article { display: grid; grid-template-columns: .45fr 1.3fr .85fr; gap: 64px; padding: 32px; background: #0b151d; }
+    .outcome-grid article + article { border-top: 1px solid var(--line); }
+    .outcome-grid article > div { display: flex; flex-direction: column; align-items: flex-start; gap: 34px; }
+    .outcome-grid span { color: var(--amber); font: 600 .65rem/1 ui-monospace, monospace; }
+    .outcome-grid b { color: #718184; font: 600 .62rem/1.3 ui-monospace, monospace; letter-spacing: .13em; }
+    .outcome-grid h3 { margin: 0; font: 400 1.65rem/1.25 Georgia, serif; }
+    .outcome-grid p { margin: 0; color: var(--muted); font-size: .87rem; line-height: 1.75; }
+
+    .susceptibility { margin-top: 74px; display: grid; grid-template-columns: .86fr 1.14fr; gap: 100px; }
+    .susceptibility h2 { margin: 24px 0; max-width: 12ch; }
+    .susceptibility-title > p:last-child { color: var(--muted); max-width: 51ch; font-size: .9rem; line-height: 1.8; }
+    .susceptibility-notes { border-top: 1px solid var(--line); }
+    .susceptibility-notes article { padding: 25px 0 27px; border-bottom: 1px solid var(--line); }
+    .susceptibility-notes .card-tag { color: var(--cyan); }
+    .susceptibility-notes h3 { margin: 12px 0 8px; font: 400 1.35rem/1.25 Georgia, serif; }
+    .susceptibility-notes article > p:last-child { margin: 0; color: var(--muted); font-size: .84rem; line-height: 1.75; }
+
+    .question-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; border: 1px solid var(--line); background: var(--line); }
+    .question-grid article { background: #0a141c; min-height: 220px; padding: 30px; }
+    .question-grid span { color: var(--amber); font: 600 .64rem/1 ui-monospace, monospace; }
+    .question-grid h3 { font: 400 1.5rem/1.2 Georgia, serif; margin: 44px 0 8px; }
+    .question-grid p { color: var(--muted); margin: 0; max-width: 46ch; font-size: .88rem; }
+
+    .evidence { padding: 110px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 100px; }
+    .evidence h2 { margin-top: 22px; max-width: 11ch; }
+    .evidence-links { border-top: 1px solid var(--line); }
+    .evidence-links a {
+      display: grid;
+      grid-template-columns: 135px 1fr auto;
+      gap: 18px;
+      padding: 21px 0;
+      border-bottom: 1px solid var(--line);
+      color: #b6c2c3;
+      font-size: .85rem;
+      transition: color 160ms ease, padding 160ms ease;
+    }
+    .evidence-links a:hover { color: var(--ink); padding-left: 8px; }
+    .evidence-links span { color: var(--cyan); font: 600 .7rem/1.4 ui-monospace, monospace; letter-spacing: .08em; }
+    .evidence-links b { color: var(--amber); font-weight: 400; }
+
+    footer {
+      min-height: 180px;
+      padding: 45px 0;
+      border-top: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 30px;
+      color: #6f8082;
+      font-size: .72rem;
+    }
+    footer p { margin: 0; }
+    footer p:nth-child(2) { text-align: center; }
+    footer p:last-child { text-align: right; }
+    footer strong { color: #aebabb; font-size: .8rem; }
+
+    @media (max-width: 980px) {
+      .shell { width: min(100% - 36px, 820px); }
+      .site-header { align-items: flex-start; padding: 22px 0; gap: 24px; }
+      nav { flex-wrap: wrap; justify-content: flex-end; gap: 14px 20px; }
+      .hero, .health-panel { grid-template-columns: 1fr; }
+      .hero { padding-bottom: 80px; }
+      .hero-copy { padding-bottom: 0; }
+      .event-figure, .cell-figure { width: min(680px, 100%); margin: -35px auto 0; }
+      .statement, .section-heading { grid-template-columns: 1fr 2fr; gap: 30px; }
+      .statement > p:last-child, .section-heading > p:last-child { grid-column: 2; }
+      .outcome-grid article { grid-template-columns: 1fr 2fr; gap: 30px; }
+      .outcome-grid article > p { grid-column: 2; }
+      .susceptibility { grid-template-columns: 1fr; gap: 45px; }
+      .susceptibility h2 { max-width: 16ch; }
+      .evidence { gap: 50px; }
+    }
+
+    @media (max-width: 700px) {
+      .shell { width: min(100% - 28px, 600px); }
+      .site-header { flex-direction: column; }
+      nav { justify-content: flex-start; gap: 10px 18px; }
+      nav a { font-size: .76rem; }
+      .hero { min-height: 0; }
+      .hero-copy { padding-top: 72px; }
+      .hero h1 { font-size: clamp(3.2rem, 17vw, 5rem); }
+      .lede { font-size: 1rem; }
+      .coordinate-strip { grid-template-columns: 1fr; gap: 13px; }
+      .coordinate-strip div + div { border-left: 0; padding-left: 0; }
+      .event-figure, .cell-figure { margin-top: -5px; }
+      .figure-caption { margin-left: 0; }
+      .statement, .section-heading, .evidence { grid-template-columns: 1fr; gap: 28px; }
+      .statement { padding: 76px 0; }
+      .statement > p:last-child, .section-heading > p:last-child { grid-column: 1; }
+      .section-block, .pathway, .evidence { padding: 78px 0; }
+      .source-grid, .question-grid { grid-template-columns: 1fr; }
+      .source-card { min-height: 310px; }
+      .source-symbol { margin-bottom: 38px; }
+      .pathway-list { grid-template-columns: 1fr 1fr; }
+      .pathway-list li:nth-child(2)::after { display: none; }
+      .outcome-grid article { grid-template-columns: 1fr; gap: 22px; padding: 25px; }
+      .outcome-grid article > div { gap: 18px; }
+      .outcome-grid article > p { grid-column: 1; }
+      .susceptibility { margin-top: 60px; gap: 30px; }
+      .evidence h2 { max-width: 15ch; }
+      .evidence-links a { grid-template-columns: 100px 1fr auto; }
+      footer { grid-template-columns: 1fr; }
+      footer p:nth-child(2), footer p:last-child { text-align: left; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .tracks path { animation: none; stroke-dashoffset: 0; }
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+
+<body id="top">
+  <!-- This file is self-contained: upload it as Research/IR/index.html. -->
+  <main>
+    <div class="shell">
+      <header class="site-header">
+        <a class="identity" href="../index.html" aria-label="Return to Robert B. Scott's main research page">
+          <span class="identity-mark" aria-hidden="true">RBS</span>
+          <span>Robert B. Scott <small>Research</small></span>
+        </a>
+        <nav aria-label="Primary navigation">
+          <a href="#top">Overview</a>
+          <a href="#exposure">Sources</a>
+          <a href="#health-effects">Health effects</a>
+          <a href="#evidence">Evidence</a>
+        </nav>
+      </header>
+
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow"><span></span> Environmental physics · radiobiology · risk</p>
+          <h1>Ionizing radiation<br><em>&amp; human health</em></h1>
+          <p class="lede">
+            A physics-led research notebook about how natural radiation fields become
+            biological dose—and how dose becomes evidence about human health.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#questions">Explore the questions <span aria-hidden="true">↘</span></a>
+            <a class="button secondary" href="#health-effects">Health effects <span aria-hidden="true">↓</span></a>
+          </div>
+          <dl class="coordinate-strip" aria-label="Scope of this research page">
+            <div><dt>DOMAIN</dt><dd>Environmental exposure</dd></div>
+            <div><dt>SCALE</dt><dd>Particle → population</dd></div>
+            <div><dt>APPROACH</dt><dd>Critical synthesis</dd></div>
+          </dl>
+        </div>
+
+        <figure class="event-figure" aria-labelledby="event-caption">
+          <svg class="event-display" viewBox="0 0 760 640" role="img" aria-labelledby="event-title event-desc">
+            <title id="event-title">Stylised charged-particle event display</title>
+            <desc id="event-desc">Tracks curve away from a central interaction point inside concentric detector layers.</desc>
+            <g class="detector-grid">
+              <circle cx="380" cy="320" r="75"></circle>
+              <circle cx="380" cy="320" r="145"></circle>
+              <circle cx="380" cy="320" r="220"></circle>
+              <circle cx="380" cy="320" r="292"></circle>
+              <path d="M88 320H672M380 28V612M174 114L586 526M174 526L586 114"></path>
+            </g>
+            <g class="tracks track-cyan">
+              <path pathLength="1" d="M378 321C297 272 226 199 102 181"></path>
+              <path pathLength="1" d="M380 320C438 235 531 194 686 224"></path>
+              <path pathLength="1" d="M381 320C487 347 546 436 548 590"></path>
+              <path pathLength="1" d="M378 319C330 397 249 447 116 466"></path>
+            </g>
+            <g class="tracks track-amber">
+              <path pathLength="1" d="M380 320C358 219 407 121 519 64"></path>
+              <path pathLength="1" d="M380 320C277 336 201 299 119 229"></path>
+              <path pathLength="1" d="M381 320C416 406 407 493 350 586"></path>
+            </g>
+            <g class="secondary-tracks">
+              <path d="M526 209C558 175 588 161 630 156"></path>
+              <path d="M244 412C209 429 181 458 164 499"></path>
+              <path d="M462 397C489 415 518 420 548 416"></path>
+            </g>
+            <circle class="interaction-core" cx="380" cy="320" r="8"></circle>
+            <circle class="interaction-halo" cx="380" cy="320" r="20"></circle>
+          </svg>
+          <figcaption class="figure-caption" id="event-caption">
+            <span>FIG. 01</span>
+            Event display as visual language: measurement, trajectories and uncertainty—not decoration alone.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="statement" aria-label="Research premise">
+        <p class="section-index">A / PREMISE</p>
+        <blockquote>
+          The difficult question is not whether radiation can damage matter. It is how a
+          measurable physical event propagates through repair, tissue biology and decades of life.
+        </blockquote>
+        <p>
+          Low environmental doses are far below those associated with immediate tissue reactions.
+          For long-term effects such as cancer, however, a universally risk-free threshold has not
+          been demonstrated. Radiation protection therefore works with population evidence,
+          explicit assumptions and uncertainty.
+        </p>
+      </section>
+
+      <section class="section-block" id="exposure">
+        <div class="section-heading">
+          <p class="section-index">B / EXPOSURE FIELDS</p>
+          <h2>The background is not one thing.</h2>
+          <p>Source, energy spectrum, route of exposure and the affected tissue all matter.</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <div class="source-symbol" aria-hidden="true">μ</div>
+            <p class="card-tag">EXTERNAL FIELD</p>
+            <h3>Cosmic radiation</h3>
+            <p>Primary particles meet the atmosphere and generate a mixed field of secondary particles. Exposure changes with altitude, latitude and solar conditions.</p>
+          </article>
+          <article class="source-card">
+            <div class="source-symbol" aria-hidden="true">Rn</div>
+            <p class="card-tag">INTERNAL EXPOSURE</p>
+            <h3>Radon</h3>
+            <p>A radioactive gas produced in the uranium decay chain. Its short-lived progeny can be inhaled and irradiate the respiratory tract.</p>
+          </article>
+          <article class="source-card">
+            <div class="source-symbol" aria-hidden="true">γ</div>
+            <p class="card-tag">LOCAL GEOLOGY</p>
+            <h3>Terrestrial radiation</h3>
+            <p>Uranium, thorium and potassium-40 in rocks, soils and building materials contribute to the local background field.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="pathway" aria-labelledby="pathway-title">
+        <div class="section-heading compact">
+          <p class="section-index">C / CAUSAL CHAIN</p>
+          <h2 id="pathway-title">From field to inference</h2>
+        </div>
+        <ol class="pathway-list">
+          <li><span>01</span><strong>Radiation field</strong><small>type · energy · geometry</small></li>
+          <li><span>02</span><strong>Energy deposition</strong><small>track structure · dose</small></li>
+          <li><span>03</span><strong>Cellular response</strong><small>damage · repair · fate</small></li>
+          <li><span>04</span><strong>Health evidence</strong><small>endpoint · time · uncertainty</small></li>
+        </ol>
+      </section>
+
+      <section class="section-block" id="health-effects">
+        <div class="health-panel">
+          <div class="health-copy">
+            <p class="section-index">D / HEALTH EFFECTS</p>
+            <h2>One track.<br><em>Many possible fates.</em></h2>
+            <p class="lede">
+              Ionization is a physical event. Health is an emergent outcome shaped by
+              spatial damage, repair, tissue context, time and individual susceptibility.
+            </p>
+          </div>
+
+          <figure class="cell-figure" aria-labelledby="cell-caption">
+            <svg viewBox="0 0 700 610" role="img" aria-labelledby="cell-title cell-desc">
+              <title id="cell-title">Cellular response to an ionizing track</title>
+              <desc id="cell-desc">An ionizing track crosses a cell and nucleus, producing clustered DNA damage.</desc>
+              <defs>
+                <marker id="arrow-cyan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M0 0L10 5L0 10z" fill="#73ded7"></path>
+                </marker>
+              </defs>
+              <path class="cell-membrane" d="M92 318C94 173 199 76 351 75c160-1 269 87 268 235-1 157-101 251-265 251-159 0-264-94-262-243Z"></path>
+              <path class="cell-inner" d="M104 319C106 182 204 88 351 87c153-1 256 82 255 224-1 148-96 237-252 237-151 0-252-89-250-229Z"></path>
+              <circle class="nucleus" cx="348" cy="310" r="145"></circle>
+              <circle class="nucleus-ring" cx="348" cy="310" r="153"></circle>
+              <g class="dna-helix">
+                <path d="M276 225C357 250 338 286 421 307C492 326 476 367 402 395"></path>
+                <path d="M414 221C341 250 358 285 276 308C209 327 226 365 296 393"></path>
+                <path d="M296 232L395 230M283 262L413 263M285 301L414 300M284 340L415 340M301 380L397 381"></path>
+              </g>
+              <path class="ion-track" d="M19 119L252 261L675 504" marker-end="url(#arrow-cyan)"></path>
+              <g class="ionization-points">
+                <circle cx="82" cy="157" r="3"></circle><circle cx="123" cy="182" r="4"></circle>
+                <circle cx="169" cy="211" r="3"></circle><circle cx="213" cy="237" r="4"></circle>
+                <circle cx="257" cy="264" r="4"></circle><circle cx="304" cy="291" r="3"></circle>
+                <circle cx="350" cy="318" r="5"></circle><circle cx="401" cy="347" r="3"></circle>
+                <circle cx="446" cy="374" r="4"></circle><circle cx="494" cy="402" r="3"></circle>
+                <circle cx="543" cy="430" r="4"></circle><circle cx="591" cy="458" r="3"></circle>
+              </g>
+              <g class="lesion-mark">
+                <path d="M336 303l26 28M362 303l-26 28"></path>
+                <circle cx="349" cy="317" r="23"></circle>
+              </g>
+              <g class="figure-labels">
+                <path d="M504 145L452 211"></path><text x="512" y="142">nuclear DNA</text>
+                <path d="M104 500L153 448"></path><text x="17" y="520">cell membrane</text>
+                <path d="M514 322L390 318"></path><text x="522" y="319">clustered lesion</text>
+              </g>
+            </svg>
+            <figcaption class="figure-caption" id="cell-caption"><span>FIG. 02</span> Track structure links physical dose to the spatial pattern of molecular damage.</figcaption>
+          </figure>
+        </div>
+
+        <div class="outcome-grid">
+          <article>
+            <div><span>01</span><b>THRESHOLD-LIKE</b></div>
+            <h3>Tissue reactions</h3>
+            <p>At sufficiently high dose, enough cells are injured to impair tissue function. Severity rises with dose above an endpoint-specific threshold.</p>
+          </article>
+          <article>
+            <div><span>02</span><b>STOCHASTIC RISK</b></div>
+            <h3>Cancer and heritable effects</h3>
+            <p>Protection models treat cancer as a probability that may increase with dose. At low dose, the increment is difficult to distinguish epidemiologically from baseline variation.</p>
+          </article>
+          <article>
+            <div><span>03</span><b>ACTIVE RESEARCH</b></div>
+            <h3>Ageing and non-cancer outcomes</h3>
+            <p>DNA damage, inflammation and epigenetic change are biologically connected, but environmental-dose effects and their clinical importance require careful causal evidence.</p>
+          </article>
+        </div>
+
+        <div class="susceptibility">
+          <div class="susceptibility-title">
+            <p class="section-index">INDIVIDUAL VARIATION</p>
+            <h2>The “average person” is a model, not a patient.</h2>
+            <p>
+              Radiation-protection quantities are designed for populations. Rare inherited defects
+              in DNA-damage signalling or repair can produce much larger biological effects than
+              common variants, but sensitivity is pathway-, tissue- and endpoint-specific.
+            </p>
+          </div>
+          <div class="susceptibility-notes">
+            <article>
+              <p class="card-tag">HIGH-PENETRANCE CONDITIONS</p>
+              <h3>DNA-damage response syndromes</h3>
+              <p>Examples include ataxia-telangiectasia, Nijmegen breakage syndrome, LIG4 syndrome and some Fanconi-anaemia disorders. Clinical decisions require specialist assessment.</p>
+            </article>
+            <article>
+              <p class="card-tag">A USEFUL CAVEAT</p>
+              <h3>Xeroderma pigmentosum (XP)</h3>
+              <p>XP is defined chiefly by defective repair of UV-induced DNA lesions. Marked sensitivity to ionizing radiation is not a universal feature and varies with complementation group and experimental system.</p>
+            </article>
+            <article>
+              <p class="card-tag">AGEING BIOLOGY</p>
+              <h3>Damage and epigenetics</h3>
+              <p>Persistent lesions and repair can reshape chromatin and transcription; altered chromatin can in turn change damage recognition and repair. Neither process alone explains normal ageing.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-block" id="questions">
+        <div class="section-heading">
+          <p class="section-index">E / RESEARCH QUESTIONS</p>
+          <h2>Where the physics meets the biology.</h2>
+        </div>
+        <div class="question-grid">
+          <article><span>01</span><h3>Exposure</h3><p>How should a chronic, low-dose and mixed radiation field be characterised?</p></article>
+          <article><span>02</span><h3>Mechanism</h3><p>Which lesions persist, and when does repair restore function or introduce error?</p></article>
+          <article><span>03</span><h3>Variation</h3><p>How strongly do age, tissue and inherited DNA-repair variants modify risk?</p></article>
+          <article><span>04</span><h3>Evidence</h3><p>What can population studies resolve at environmental dose levels?</p></article>
+        </div>
+      </section>
+
+      <section class="evidence" id="evidence">
+        <div>
+          <p class="section-index">F / EVIDENCE DESK</p>
+          <h2>Start with institutions that assess evidence, not headlines.</h2>
+        </div>
+        <div class="evidence-links">
+          <a href="https://www.unscear.org/unscear/en/publications/2024_2.html" target="_blank" rel="noreferrer">
+            <span>UNSCEAR</span> 2024 assessment of public exposure <b aria-hidden="true">↗</b>
+          </a>
+          <a href="https://www.unscear.org/unscear/en/publications/radiation-effects-and-sources.html" target="_blank" rel="noreferrer">
+            <span>UNSCEAR / UNEP</span> Radiation: Effects and Sources <b aria-hidden="true">↗</b>
+          </a>
+          <a href="https://www.who.int/news-room/fact-sheets/detail/radon-and-health" target="_blank" rel="noreferrer">
+            <span>WHO</span> Radon and health <b aria-hidden="true">↗</b>
+          </a>
+          <a href="https://www.icrp.org/page.asp?id=5" target="_blank" rel="noreferrer">
+            <span>ICRP</span> Radiological-protection publications <b aria-hidden="true">↗</b>
+          </a>
+        </div>
+      </section>
+
+      <footer>
+        <p><strong>Robert B. Scott</strong><br>Physics · biophysics · diseases of ageing</p>
+        <p>This research overview is not individual medical advice.</p>
+        <p>© 2026 · Brest, France</p>
+      </footer>
+    </div>
+  </main>
+</body>
+</html>
