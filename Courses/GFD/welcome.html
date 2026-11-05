@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Physique Atomique et Nucléaire — UBO</title>
+  <style>
+    :root {
+      --papier: rgba(247, 242, 231, 0.94);
+      --papier-clair: rgba(252, 249, 241, 0.88);
+      --encre: #2b2218;
+      --brun: #5a4632;
+      --or-vieilli: #8b6b3f;
+      --bordure: rgba(77, 58, 38, 0.45);
+      --ombre: rgba(0, 0, 0, 0.28);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--encre);
+      line-height: 1.65;
+      background:
+        linear-gradient(rgba(30, 24, 18, 0.55), rgba(30, 24, 18, 0.55)),
+        url('Albert_Einstein_writing_on_a_blackboard_in_Pasadena_(1931).jpg') center center / cover fixed no-repeat;
+      min-height: 100vh;
+    }
+
+    .page {
+      width: min(960px, calc(100% - 48px));
+      margin: 42px auto;
+      background: var(--papier);
+      border: 1px solid var(--bordure);
+      box-shadow: 0 12px 32px var(--ombre);
+    }
+
+    header {
+      padding: 48px 56px 28px;
+      border-bottom: 3px double var(--or-vieilli);
+      background: linear-gradient(to bottom, rgba(255,255,255,0.35), rgba(255,255,255,0.08));
+    }
+
+    .universite {
+      margin: 0;
+      text-align: center;
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--brun);
+    }
+
+    h1 {
+      margin: 14px 0 8px;
+      text-align: center;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: normal;
+      letter-spacing: 0.04em;
+    }
+
+    .sous-titre {
+      text-align: center;
+      font-size: 1.1rem;
+      margin: 0;
+      color: #4b3a28;
+      font-style: italic;
+    }
+
+    main {
+      padding: 34px 56px 52px;
+      background: var(--papier-clair);
+    }
+
+    section + section {
+      margin-top: 34px;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin: 0 0 14px;
+      font-weight: normal;
+      border-bottom: 1px solid var(--or-vieilli);
+      padding-bottom: 6px;
+      color: #3f2f20;
+    }
+
+    p {
+      margin: 0 0 14px;
+      text-align: justify;
+    }
+
+    .encadre {
+      padding: 18px 22px;
+      background: rgba(255, 252, 245, 0.72);
+      border-left: 4px solid var(--or-vieilli);
+      border-right: 1px solid rgba(139, 107, 63, 0.35);
+      border-top: 1px solid rgba(139, 107, 63, 0.2);
+      border-bottom: 1px solid rgba(139, 107, 63, 0.2);
+    }
+
+    ul {
+      margin: 10px 0 0 0;
+      padding-left: 22px;
+    }
+
+    li {
+      margin: 8px 0;
+    }
+
+    a {
+      color: #5c3d16;
+      text-decoration: none;
+      border-bottom: 1px dotted #5c3d16;
+    }
+
+    a:hover {
+      color: #2f2213;
+      border-bottom-style: solid;
+    }
+
+    footer {
+      padding: 18px 56px 30px;
+      text-align: center;
+      font-size: 0.95rem;
+      color: #5c4a39;
+      background: rgba(240, 232, 216, 0.92);
+      border-top: 1px solid rgba(77, 58, 38, 0.2);
+    }
+
+    @media (max-width: 700px) {
+      .page {
+        width: calc(100% - 20px);
+        margin: 12px auto;
+      }
+
+      header,
+      main,
+      footer {
+        padding-left: 22px;
+        padding-right: 22px;
+      }
+
+      h1 {
+        letter-spacing: 0.02em;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <header>
+      <p style="margin:0 0 10px; text-align:left;">
+        <a href="https://robertbrucescott.github.io/Research/#teaching">
+          ← Retour à la page d’enseignement de Rob Scott
+        </a>
+      </p>
+
+      <p class="universite">Université de Bretagne Occidentale — Master 1 Physique</p>
+      <h1>Physique Atomique et Nucléaire</h1>
+      <p class="sous-titre">Page d’accueil du cours</p>
+    </header>
+
+    <main>
+
+      <section>
+        <h2>Présentation</h2>
+        <div class="encadre">
+
+<p>
+La <strong>Physique Atomique et Nucléaire</strong> est un cours destiné aux étudiants de <strong>M1 Physique</strong> à l’UBO.
+</p>
+
+<p>
+<a href="https://formations.univ-brest.fr/fr/index/sciences-technologies-sante-STS/master-XB/master-physique-fondamentale-et-applications-INR8L8YY/parcours-physique-et-instrumentation-IOMO11CU.html" target="_blank">
+Programme du Master Physique – UBO
+</a>
+</p>
+
+<p>
+Ce cours propose une introduction rigoureuse aux principes de la physique atomique et nucléaire, avec 
+<strong>les huit premiers cours consacrés aux aspects théoriques</strong> et 
+<strong>les quatre derniers cours dédiés aux applications, en particulier médicales</strong>.
+</p>
+
+<p>
+Nous supposons comme prérequis la <strong>mécanique quantique non relativiste</strong> : les étudiants doivent être à l’aise avec 
+<strong>l’équation de Schrödinger</strong> et son application à <strong>l’atome d’hydrogène</strong>, ainsi qu’avec les 
+<strong>bases de la relativité restreinte</strong>.
+</p>
+
+<p>
+Pour la <strong>physique atomique</strong>, nous couvrons notamment 
+<strong>la théorie de Hartree–Fock appliquée aux atomes à plusieurs électrons</strong>.
+</p>
+
+<p>
+Pour la <strong>physique nucléaire</strong>, nous étudions <strong>les propriétés observées des noyaux</strong> ainsi que 
+<strong>des modèles simples du noyau</strong>. Nous utilisons 
+<strong>le modèle semi-empirique de masse</strong> afin de comprendre 
+<strong>la stabilité des éléments et les phénomènes de radioactivité</strong>.
+</p>
+
+<p>
+Nous examinons également <strong>les principaux modes de désintégration radioactive</strong> — 
+<strong>alpha, bêta et gamma</strong> — ainsi que <strong>la fission spontanée</strong>, 
+<strong>les chaînes de désintégration radioactives</strong>, et 
+<strong>quelques exemples de réactions nucléaires</strong>.
+</p>
+
+        </div>
+      </section>
+
+      <section>
+        <h2>Support pour ce cours</h2>
+
+        <h3>Notes de cours</h3>
+        <ul>
+          <li><a href="book_phys_nuc.pdf" target="_blank">Cours</a></li>
+        </ul>
+
+        <h3>Travaux dirigés</h3>
+        <ul>
+          <li><a href="M1_nuc_TD_01.pdf" target="_blank">TD 1: la théorie de Hartree-Fock de l'atome polyatomique </a></li>
+          <li><a href="M1_nuc_TD_02.pdf" target="_blank">TD 2: La théorie de Hartree-Fock de l'atome polyatomique et le tableau périodique</a></li>
+          <li><a href="M1_nuc_TD_03.pdf" target="_blank">TD 3: Modèles du noyau atomique: modèle de la goutte liquide</a></li>
+          <li><a href="M1_nuc_TD_04.pdf" target="_blank">TD 4: Le modèle de la goutte liquide: Formule semi-empirique de masse</a></li>
+          <li><a href="M1_nuc_TD_05.pdf" target="_blank">TD 5: Les nombres magiques</a></li>
+          <li><a href="M1_nuc_TD_06.pdf" target="_blank">TD 6: Radioactivité</a></li>
+          <li><a href="M1_nuc_TD_07.pdf" target="_blank">TD 7: Radioactivité: désintégration beta</a></li>
+          <li><a href="M1_nuc_TD_08.pdf" target="_blank">TD 8: Réactions nucléaires</a></li>
+          <li><a href="M1_nuc_TD_09.pdf" target="_blank">TD 9: Physique médicale et P.E.T.</a></li>
+
+        </ul>
+<h3>Pour vous aider préparer l'examen</h3>
+        <ul>
+          <li><a href="M1_nuc_TravauxSupp.pdf" target="_blank">Travaux supplémentaires</a></li>
+           <li><a href="Examen_2026_session1.pdf" target="_blank">Examen de session 1 corrigé.</a></li>
+        </ul>
+
+      <section class="bibliography">
+        <h3>Bibliographie</h3>
+        <ul>
+          <li><strong>Robert Eisberg and Robert Resnick</strong>, <em>Quantum Physics of Atoms, Molecules, Solids, Nuclei, and Particles</em>, 2nd Edition.</li>
+          <li><strong>Claude Le Sech</strong> and <strong>Christian Ngô</strong>, <em>Physique nucléaire : des quarks aux applications</em>.</li>
+          <li><strong>Luc Valentin</strong>, <em>Le monde subatomique</em>.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Vidéos recommandées</h2>
+        <ul>
+          <li><a href="https://youtu.be/7LyvAVjQUR8?si=TlT1yVfv8bJ9rrh3" target="_blank">MIT 22.01 Introduction to Nuclear Engineering and Ionizing Radiation</a></li>
+        </ul>
+      </section>
+
+    </main>
+
+    <footer>
+      <p>Cours de Physique Atomique et Nucléaire — UBO</p>
+      <p>
+        <a href="https://robertbrucescott.github.io/Research/#teaching">
+          Retour à la page d’enseignement de Rob Scott
+        </a>
+      </p>
+    </footer>
+
+  </div>
+</body>
+</html>
